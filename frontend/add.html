@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MemoryMap — Add Memory</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="index.html" class="nav-logo">MemoryMap</a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="add.html" class="nav-link active">Add Memory</a>
+    </div>
+    <div class="nav-right">
+      <div class="avatar">👤</div>
+    </div>
+  </nav>
+
+  <main class="form-page">
+    <div class="form-header">
+      <h1 class="form-title">Preserve a Moment</h1>
+      <p class="form-subtitle">Every journey is a story. Capture yours here.</p>
+    </div>
+
+    <div class="form-card">
+
+      <!-- Upload Photo -->
+      <div class="field-group">
+        <label class="field-label">Upload Photo</label>
+        <div class="dropzone" id="dropzone">
+          <input type="file" id="photoInput" accept="image/jpeg,image/png" hidden />
+          <div class="dropzone-content" id="dropzoneContent">
+            <div class="upload-icon">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.8">
+                <polyline points="16 16 12 12 8 16"></polyline>
+                <line x1="12" y1="12" x2="12" y2="21"></line>
+                <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path>
+              </svg>
+            </div>
+            <p class="dropzone-text">
+              Drag and drop your memory or <span class="browse-link" id="browseBtn">browse</span>
+            </p>
+            <p class="dropzone-hint">SUPPORTS JPG, PNG UP TO 10MB</p>
+          </div>
+          <div class="preview-container hidden" id="previewContainer">
+            <img id="previewImg" src="" alt="Preview" class="preview-img" />
+            <button class="remove-photo" id="removePhoto" type="button">✕ Remove</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trip Title & Location -->
+      <div class="field-row">
+        <div class="field-group">
+          <label class="field-label" for="tripTitle">Trip Title</label>
+          <input type="text" id="tripTitle" class="field-input" placeholder="e.g., Summer in Santorini" />
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="location">Location</label>
+          <div class="input-with-icon">
+            <span class="input-icon">📍</span>
+            <input type="text" id="location" class="field-input with-icon" placeholder="Where were you?" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Travel Date -->
+      <div class="field-group">
+        <label class="field-label" for="travelDate">Travel Date</label>
+        <div class="input-with-icon">
+          <span class="input-icon">📅</span>
+          <input type="date" id="travelDate" class="field-input with-icon" />
+        </div>
+      </div>
+
+      <!-- Description -->
+      <div class="field-group">
+        <label class="field-label" for="description">Description</label>
+        <textarea id="description" class="field-textarea" placeholder="Tell the story behind this moment..."></textarea>
+      </div>
+
+      <!-- Tags — quick tags -->
+      <div class="field-group">
+        <label class="field-label">Tags <span style="font-weight:400;color:#9CA3AF;">(Choose one or more tags below)</span></label>
+        <div class="quick-tags" id="quickTagsContainer">
+          <button class="quick-tag" data-tag="beach"     type="button">#Beach</button>
+          <button class="quick-tag" data-tag="hiking"    type="button">#Hiking</button>
+          <button class="quick-tag" data-tag="city breaks" type="button">#CityBreaks</button>
+          <button class="quick-tag" data-tag="food"      type="button">#Food</button>
+          <button class="quick-tag" data-tag="adventure" type="button">#Adventure</button>
+          <button class="quick-tag" data-tag="family"    type="button">#Family</button>
+          <button class="quick-tag" data-tag="nature"    type="button">#Nature</button>
+        </div>
+        <!-- Hidden: menampilkan tag yang terpilih -->
+        <p id="selectedTagsLabel" style="font-size:0.8rem;color:#2563EB;margin-top:8px;min-height:20px;"></p>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="form-actions">
+        <button class="btn-primary" id="saveBtn" type="button">Save Memory</button>
+        <a href="index.html" class="btn-secondary">Cancel</a>
+      </div>
+
+    </div>
+  </main>
+
+  <div class="toast hidden" id="toast"></div>
+  <script src="js/add.js"></script>
+</body>
+</html>

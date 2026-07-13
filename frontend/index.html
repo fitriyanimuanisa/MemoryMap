@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MemoryMap — Your Travel Stories</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ── NAVBAR ─────────────────────────────────────────── -->
+  <nav class="navbar">
+    <a href="index.html" class="nav-logo">MemoryMap</a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link active">Home</a>
+      <a href="add.html" class="nav-link">Add Memory</a>
+    </div>
+    <div class="nav-right">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" placeholder="Search memories..." />
+      </div>
+      <div class="avatar">👤</div>
+    </div>
+  </nav>
+
+  <!-- ── HERO ───────────────────────────────────────────── -->
+  <section class="hero">
+    <h1 class="hero-title">Your Travel Stories</h1>
+    <p class="hero-subtitle">
+      Rediscover the places you've been and the moments that stay with you
+      forever. A calm space for your digital nostalgia.
+    </p>
+  </section>
+
+  <!-- ── FILTER TAGS ────────────────────────────────────── -->
+  <section class="filter-section">
+    <div class="filter-tags">
+      <button class="tag-btn active" data-filter="all">All Memories</button>
+      <button class="tag-btn" data-filter="beach">Beach</button>
+      <button class="tag-btn" data-filter="hiking">Hiking</button>
+      <button class="tag-btn" data-filter="city breaks">City Breaks</button>
+      <button class="tag-btn" data-filter="food">Food</button>
+      <button class="tag-btn" data-filter="adventure">Adventure</button>
+      <button class="tag-btn" data-filter="family">Family</button>
+      <button class="tag-btn" data-filter="nature">Nature</button>
+    </div>
+  </section>
+
+  <!-- ── MEMORY CARDS ───────────────────────────────────── -->
+  <section class="cards-section">
+    <div class="cards-grid" id="cardsGrid">
+      <div class="loading-state" id="loadingState">
+        <div class="spinner"></div>
+        <p>Loading your memories...</p>
+      </div>
+      <div class="empty-state hidden" id="emptyState">
+        <div class="empty-icon">🗺️</div>
+        <h3>No memories yet</h3>
+        <p>Start by adding your first travel memory!</p>
+        <a href="add.html" class="btn-primary">Add Memory</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FAB ────────────────────────────────────────────── -->
+  <a href="add.html" class="fab" title="Add Memory">＋</a>
+
+  <!-- ── TOAST ──────────────────────────────────────────── -->
+  <div class="toast hidden" id="toast"></div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

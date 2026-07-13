@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MemoryMap — Edit Memory</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="index.html" class="nav-logo">MemoryMap</a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="add.html" class="nav-link active">Add Memory</a>
+    </div>
+    <div class="nav-right">
+      <div class="avatar">👤</div>
+    </div>
+  </nav>
+
+  <main class="edit-page">
+    <a href="index.html" class="back-link">← Edit Memory</a>
+
+    <div class="edit-layout">
+
+      <!-- LEFT: Photo -->
+      <div class="edit-photo-col">
+        <div class="edit-photo-wrap">
+          <img id="editPhotoPreview" src="" alt="Memory Photo" class="edit-photo-img" />
+          <p class="edit-photo-caption" id="editPhotoCaption">Original photo uploaded</p>
+        </div>
+      </div>
+
+      <!-- RIGHT: Form -->
+      <div class="edit-form-col">
+        <div class="edit-form-card">
+
+          <!-- Memory Title -->
+          <div class="field-group">
+            <label class="field-label" for="editTitle">Memory Title</label>
+            <input type="text" id="editTitle" class="field-input" placeholder="e.g., Summer in Amalfi Coast" />
+          </div>
+
+          <!-- Location & Date -->
+          <div class="field-row">
+            <div class="field-group">
+              <label class="field-label" for="editLocation">Location</label>
+              <div class="input-with-icon">
+                <span class="input-icon">📍</span>
+                <input type="text" id="editLocation" class="field-input with-icon" placeholder="Where were you?" />
+              </div>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="editDate">Date</label>
+              <div class="input-with-icon">
+                <span class="input-icon">📅</span>
+                <input type="date" id="editDate" class="field-input with-icon" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Description -->
+          <div class="field-group">
+            <label class="field-label" for="editDescription">Description</label>
+            <textarea id="editDescription" class="field-textarea" placeholder="Tell the story behind this moment..."></textarea>
+          </div>
+
+          <!-- Tags — quick tags sama seperti Add page -->
+          <div class="field-group">
+            <label class="field-label">Tags <span style="font-weight:400;color:#9CA3AF;">(select one or more)</span></label>
+            <div class="quick-tags" id="editTagsContainer">
+              <button class="quick-tag" data-tag="beach"      type="button">#Beach</button>
+              <button class="quick-tag" data-tag="hiking"     type="button">#Hiking</button>
+              <button class="quick-tag" data-tag="city breaks" type="button">#CityBreaks</button>
+              <button class="quick-tag" data-tag="food"       type="button">#Food</button>
+              <button class="quick-tag" data-tag="adventure"  type="button">#Adventure</button>
+              <button class="quick-tag" data-tag="family"     type="button">#Family</button>
+              <button class="quick-tag" data-tag="nature"     type="button">#Nature</button>
+            </div>
+            <p id="editTagsLabel" style="font-size:0.8rem;color:#2563EB;margin-top:8px;min-height:20px;"></p>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="edit-actions">
+            <button class="btn-primary btn-full" id="updateBtn" type="button">Update Memory</button>
+            <a href="index.html" class="btn-secondary btn-full">Cancel</a>
+          </div>
+
+          <!-- Delete -->
+          <div class="delete-row">
+            <button class="btn-delete" id="deleteBtn" type="button">🗑 Delete Permanentely</button>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Modal Konfirmasi Delete -->
+  <div class="modal-overlay hidden" id="deleteModal">
+    <div class="modal-box">
+      <h3 class="modal-title">Delete Memory?</h3>
+      <p class="modal-text">This action cannot be undone. The memory and its photo will be permanently removed.</p>
+      <div class="modal-actions">
+        <button class="btn-danger" id="confirmDelete">Yes, Delete</button>
+        <button class="btn-secondary" id="cancelDelete">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast hidden" id="toast"></div>
+  <script src="js/edit.js"></script>
+</body>
+</html>

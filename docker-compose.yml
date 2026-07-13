@@ -1,0 +1,78 @@
+services:
+
+  # ── LocalStack: Simulasi AWS S3 + EC2 ────────────────────
+  localstack:
+    image: localstack/localstack:3.8.1
+    container_name: memorymap-localstack
+    ports:
+      - "4566:4566"
+    environment:
+      - SERVICES=s3,ec2
+      - DEFAULT_REGION=us-east-1
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+      - AWS_DEFAULT_REGION=us-east-1
+    volumes:
+      - localstack_data:/var/lib/localstack
+    networks:
+      - memorymap-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4566/_localstack/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 15
+      start_period: 20s
+
+  # ── Init: Buat bucket setelah LocalStack sehat ────────────
+  localstack-init:
+    image: amazon/aws-cli:latest
+    container_name: memorymap-s3-init
+    environment:
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+      - AWS_DEFAULT_REGION=us-east-1
+    entrypoint: >
+      sh -c "
+        echo '⏳ Menunggu LocalStack siap...' &&
+        sleep 10 &&
+        echo '🪣 Membuat bucket S3...' &&
+        aws --endpoint-url=http://localstack:4566 s3 mb s3://memorymap-bucket &&
+        aws --endpoint-url=http://localstack:4566 s3api put-bucket-acl --bucket memorymap-bucket --acl public-read &&
+        echo '✅ Bucket memorymap-bucket berhasil dibuat!'
+      "
+    depends_on:
+      localstack:
+        condition: service_healthy
+    networks:
+      - memorymap-network
+
+  # ── App: Node.js Express ──────────────────────────────────
+  app:
+    build: .
+    container_name: memorymap-app
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+      - AWS_REGION=us-east-1
+      - AWS_ENDPOINT=http://localstack:4566
+      - S3_BUCKET_NAME=memorymap-bucket
+    depends_on:
+      localstack:
+        condition: service_healthy
+    volumes:
+      - .:/app
+      - /app/node_modules
+    networks:
+      - memorymap-network
+    restart: on-failure
+
+volumes:
+  localstack_data:
+    driver: local
+
+networks:
+  memorymap-network:
+    driver: bridge
